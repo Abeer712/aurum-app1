@@ -1471,7 +1471,12 @@ export default function AurumPro() {
     // On mount: restore session from Supabase
     const init = async () => {
       try {
-        const { data: { session } } = await supabase.auth.getSession();
+        const { data: { session } } = await Promise.race([
+  supabase.auth.getSession(),
+  new Promise(resolve => 
+    setTimeout(() => resolve({ data: { session: null } }), 4000)
+  )
+]);
         if (session) {
           const u = {
             id: session.user.id,
