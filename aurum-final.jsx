@@ -1703,7 +1703,7 @@ export default function AurumPro() {
       const tpD  = form.tp ? Math.abs((parseFloat(form.tp) - parseFloat(form.entry)) * mult) : 0;
       const rr   = slD > 0 ? `1:${(tpD / slD).toFixed(1)}` : "N/A";
       const tradeObj = {
-        id: Date.now(),
+        id: crypto.randomUUID(),
         user_id: user.id,
         date: form.date, pair: form.pair, direction: form.direction,
         entry: parseFloat(form.entry), exit: parseFloat(form.exit), lots: parseFloat(form.lots),
